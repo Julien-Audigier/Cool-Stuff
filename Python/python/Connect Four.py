@@ -1,3 +1,4 @@
+import math
 def showboard():
     print()
     print("   1  2  3  4  5  6  7")
@@ -11,19 +12,25 @@ def showboard():
 def Gravity(Player,Row,Column): #Check
     if gameboard[Row][Column] == 0:
         gameboard[Row][Column]=Player
-        showboard()
-        
-    else:
+        showboard()  
+    elif Row != 0:
         Gravity(Player,Row-1,Column)
+    else:
+        showboard()
+        place(Player)
 
 def place(Player):
-#    TA SHENANIGANS DO NOT DELETE
-   Column = input("Which Column 1-7 ")
-   Temp=int(Column)
-   Column=Temp
-   Column -= 1
-#     End TA SHENANIGANS
-   Gravity(Player,5,Column)
+#   TA SHENANIGANS DO NOT DELETE
+    Column = math.ceil(float(input("Which Column 1-7 ")))
+    Temp=int(Column)
+    Column=Temp
+    if Column > 7 or Column < 1:
+        showboard()
+        place(Player)
+    else:
+        Column -= 1
+#   End TA SHENANIGANS
+        Gravity(Player,5,Column)
 
 def Start(Player):
     showboard()
