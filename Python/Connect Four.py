@@ -1,4 +1,5 @@
 import math
+
 def showboard():
     print()
     print("   1  2  3  4  5  6  7")
@@ -17,35 +18,48 @@ def Gravity(Player,Row,Column): #Check
         Gravity(Player,Row-1,Column)
     else:
         showboard()
-        place(Player)
+        place(Player,False)
 
-def place(Player):
+def place(Player,GameOver):
 #   TA SHENANIGANS DO NOT DELETE
-    Column = input("Which Column 1-7 ")
-    if Column.isdigit:
-        Column = math.ceil(float(Column))
-        Temp=int(Column)
-        Column=Temp
-        if Column > 7 or Column < 1:
-            showboard()
-            place(Player)
+    if GameOver == False:
+        Column = input("Which Column 1-7 ")
+        if Column == "k":
+            place(Player,True)
+            return
+        elif Column.isdigit():
+            Column = math.ceil(float(Column))
+            Temp=int(Column)
+            Column=Temp
+            if Column > 7 or Column < 1:
+                showboard()
+                place(Player,False)
+            else:
+                Column -= 1
+    #   End TA SHENANIGANS
+                Gravity(Player,5,Column)
+        
         else:
-            Column -= 1
-#   End TA SHENANIGANS
-            Gravity(Player,5,Column)
+            showboard()
+            place(Player,False)
     else:
-        showboard()
-        place(Player)
+        return
 
 def Start():
     print()
-    Player = int(input("Which player goes first? "))
-    Player -= 1
-    if Player > -1 and 2 > Player:
-        showboard()
+    Player = input("Which player goes first? ")
+    if Player.isdigit():
+        Player = int(Player)
+        Player -= 1
+        if Player > -1 and 2 > Player:
+            showboard()
         for i in range(0,42):
-            Player = (Player%2)+1
-            place(Player)
+                Player = (Player%2)+1
+                place(Player,False)
+        else:
+            Start()
+    else:
+        Start()
 
 # Begin Runtime Game~ ~ ~ ~ ~ ~ ~ ~
 #Before Start
