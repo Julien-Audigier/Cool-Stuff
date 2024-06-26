@@ -21,28 +21,38 @@ def Gravity(Player,Row,Column): #Check
 
 def place(Player):
 #   TA SHENANIGANS DO NOT DELETE
-    Column = math.ceil(float(input("Which Column 1-7 ")))
-    Temp=int(Column)
-    Column=Temp
-    if Column > 7 or Column < 1:
+    Column = input("Which Column 1-7 ")
+    if Column.isdigit:
+        Column = math.ceil(float(Column))
+        Temp=int(Column)
+        Column=Temp
+        if Column > 7 or Column < 1:
+            showboard()
+            place(Player)
+        else:
+            Column -= 1
+#   End TA SHENANIGANS
+            Gravity(Player,5,Column)
+    else:
         showboard()
         place(Player)
-    else:
-        Column -= 1
-#   End TA SHENANIGANS
-        Gravity(Player,5,Column)
 
-def Start(Player):
-    showboard()
-    for i in range(0,42):
-        Player = (i%2)+1
-        place(Player)
+def Start():
+    print()
+    Player = int(input("Which player goes first? "))
+    Player -= 1
+    if Player > -1 and 2 > Player:
+        showboard()
+        for i in range(0,42):
+            Player = (Player%2)+1
+            place(Player)
+
 # Begin Runtime Game~ ~ ~ ~ ~ ~ ~ ~
 #Before Start
-
+        
 gameboard=[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
 Column = 0
 win = 0
 
 #Start____
-Start(1)
+Start()
