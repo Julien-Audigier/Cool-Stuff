@@ -1,14 +1,15 @@
 import math
-def Play(Player):
-    print()
-    print("Player",str(Player))
-    print()
-    ShowBoard()
-    Column = input("Which column? ")
-    if Column == "Kill":
-        return True
-    else:
-        Collision(Player, Column)
+def Play(Player, PSwitch):
+    while PSwitch == False:
+        print()
+        print("Player",str(Player))
+        print()
+        ShowBoard()
+        Column = input("Which column? ")
+        if Column == "Kill":
+            return True
+        else:
+            PSwitch = Collision(Player, Column)
 
         
 
@@ -16,13 +17,16 @@ def Collision(Player, Column):
 
     if Column.isdigit():
         Column = int(Column)
-        if  Column > 0 and Column < 8:
+        if  (Column > 0 and Column < 8):
             Row = 5
             Column -= 1
-            while gameboard[Row][Column] != 0:
+            while gameboard[Row][Column] != 0 and Row != 0:
                 Row -= 1
-            gameboard[Row][Column] = Player
-            return True
+            if Row == 0 and gameboard[Row][Column] != 0:
+                return False
+            else:
+                gameboard[Row][Column] = Player
+                return True
         else:
             return False
     else:
@@ -43,6 +47,7 @@ def ShowBoard():
 # ~ ~ ~ MAIN ~ ~ ~ #
 gameboard=[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
 
+PSwitch = False
 Row = 0
 Player = 1
 Turns = 0
@@ -53,6 +58,6 @@ autokill = False
 while (autokill != True and win != True and Turns < 41):
     Player = (Turns % 2) + 1
     Turns += 1
-    autokill = Play(Player)
+    autokill = Play(Player, PSwitch)
     # Winchek (Eventually)
     # Repeat
