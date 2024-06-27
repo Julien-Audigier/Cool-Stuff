@@ -1,1 +1,1 @@
-Player = input("Which player goes first? ")
+Music = ["HardRock", "SoftRock","Rock","Paper", "Scissors"]
