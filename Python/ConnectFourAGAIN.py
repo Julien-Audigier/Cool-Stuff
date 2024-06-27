@@ -15,7 +15,7 @@ def Play(Player, PSwitch):
             print()
             ShowBoard()
             print("Which column?")
-            if CheckWin(Player, Column) == True:
+            if CheckWin(Column) == True:
                 return True
             else:
                 return False
@@ -48,7 +48,7 @@ def ShowBoard():
     print(gameboard[4])
     print(gameboard[5])
 
-def CheckWin(Player, Column):
+def CheckWin(Column):
      if Column.isdigit():
         Column = int(Column)
         if  (Column > 0 and Column < 8):
@@ -56,10 +56,20 @@ def CheckWin(Player, Column):
             Row = 5
             while gameboard[Row][Column] != 0 and Row != 0:
                 Row -= 1
-            Row + 1
-            if gameboard[Row + 1][Column] == gameboard[Row + 2][Column] and gameboard[Row + 2][Column] == gameboard[Row + 3][Column] and gameboard[Row + 3][Column] == gameboard[Row + 4][Column] and gameboard[Row + 4][Column] == Player:
-                #Down
+            Row += 1
+            if CheckDown(Row,Column) == True:
                 return True
+            
+                
+def CheckDown(Row, Column):
+    Points = 0
+    for i in range(Row, Row+4)
+        if  i >= 5 or gameboard[i][Column] != gameboard[Row]:
+            break
+        Points += 1
+        print(str(Points))
+    
+
 
 # ~ ~ ~ Vars ~ ~ ~ #
 gameboard=[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
