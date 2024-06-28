@@ -12,7 +12,11 @@ def ShowBoard(Board):
         else:
             print(Temp, end=" ")
     for x in range(0,len(Board)):
-        print(x+1,end=" ")
+        if  getlastdigit(i) != 0:
+            Temp = getlastdigit(i)
+        else:
+            Temp = getfirstdigit(i)
+        print(Temp+1,end=" ")
         for y in range(0,len(Board[x])):
             print(Board[x][y], end =" ")
         print(x+1)
@@ -31,10 +35,22 @@ def getlastdigit(num):
     for i in range(1,len(str(num))):
         if len(str(digit)) != 1:
             num1 = getfirstdigit(digit)
-            for n in range(1,len(str(digit))):
+            for n in range(0,(int(len(str(digit)))-1)):
                 num1 *= 10
             digit -= num1
+            if digit < 0:
+                digit = 1
     return digit
 
-GameBoard = [["_","_","_"],["_","_","_"],["_","_","_"]]
+def CreateBoard (Length):
+    Rows = []
+    Columns = []
+    for i in range(0,int(Length)):
+        Columns.append("_")
+    for i in range(0,int(Length)):
+        Rows.append(Columns)
+    return Rows
+
+GameBoard = CreateBoard(input("Enter Length: "))
+
 ShowBoard(GameBoard)
