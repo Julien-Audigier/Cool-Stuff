@@ -15,7 +15,12 @@ def Play(Player, PSwitch):
             print()
             ShowBoard()
             print("Which column?")
-            if CheckWin() == True:
+            CW = CheckWin()
+            if CW == "Kill":
+                print("Tie")
+                return True
+            elif  CW == True:
+                print("Player", Player, "has won!")
                 return True
             else:
                 return False
@@ -50,22 +55,27 @@ def ShowBoard():
 def CheckWin():
     for i in range(0,6):
         for o in range(0,4):
-            if gameboard[i][o] == gameboard[i][o+1] == gameboard[i][o+2] == gameboard[i][o+3] != 0:
-                return(True)
-        for a in range(6,1,-1):
-            if gameboard[i][a] == gameboard[i][a-1] == gameboard[i][a-2] == gameboard[i][a-3] != 0:
+            if gameboard[i][o] == gameboard[i][o+1] == gameboard[i][o+2] == gameboard[i][o+3] != 0: #Check Right/Left
                 return(True)
     for u in range(0,7):
         for g in range(0,3):
-            if gameboard[g][u] == gameboard[g+1][u] == gameboard[g+2][u] == gameboard[g+3][u] != 0:
+            if gameboard[g][u] == gameboard[g+1][u] == gameboard[g+2][u] == gameboard[g+3][u] != 0: #Check Up/Down
                 return(True)
-        for k in range(5,1,-1):
-            if gameboard[k][u] == gameboard[k-1][u] == gameboard[k-2][u] == gameboard[k-3][u] != 0:
-                return(True)
-    
-
+    for i in range(0,6):
+        for j in range(0,7):
+            try: #Check Diagonal
+                if (gameboard[i][j] == gameboard[i+1][j+1] == gameboard[i+2][j+2] == gameboard[i+3][j+3] != 0) or (gameboard[i][j] == gameboard[i+1][j-1] == gameboard[i+2][j-2] == gameboard[i+3][j-3] != 0):
+                    return(True)
+            except IndexError:
+                continue
+    for i in range(0,6):
+        for j in range(0,7):
+            if gameboard[i][j] == 0:
+                return("Tie")
+    return(False)
 
 # ~ ~ ~ Vars ~ ~ ~ #
+
 gameboard=[[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]]
 
 PSwitch = False
@@ -78,8 +88,8 @@ kill = False
 
 # ~ ~ ~ Main ~ ~ ~ #
 
-while (kill != True and Turns < 41):
+while (kill != True):
     Player = (Turns % 2) + 1
     Turns += 1
     kill = Play(Player, PSwitch)
-    # Repeat
+    # Repeat1

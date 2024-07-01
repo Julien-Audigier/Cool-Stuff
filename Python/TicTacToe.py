@@ -1,4 +1,3 @@
-import math
 
 def ShowBoard(Board, Turn):
     print()
@@ -13,38 +12,14 @@ def ShowBoard(Board, Turn):
         print(x +1)
     print("  1 2 3")
 
-def CheckWin(Player,Row,Column, Board):
-    if Row == 1:
-        if (Board[Row - 1][Column] == Player) and (Board[Row +1][Column] == Player):
-            return(True)
-        if Column == 1:
-            if ((Board[Row - 1][Column-1] == Player) and (Board[Row +1][Column+1] == Player) or (Board[Row - 1][Column+1] == Player) and (Board[Row +1][Column-1] == Player)):
+def CheckWin(Board):
+    for i in range(0,4):
+            if Board[i][0] == Board[i][1] == Board[i][2] != "_": #Check Right/Left
                 return(True)
-    if Row == 2:
-        if (Board[Row - 1][Column] == Player) and (Board[Row -2][Column] == Player):
-            return(True)
-        if Column == 2:
-            if (Board[Row - 1][Column-1] == Player) and (Board[Row -2][Column-2] == Player):
+    for u in range(0,4):
+            if Board[0][u] == Board[1][u] == Board[2][u] != "_": #Check Up/Down
                 return(True)
-        if Column == 0:
-            if (Board[Row - 1][Column+1] == Player) and (Board[Row -2][Column+2] == Player):
-                return(True)
-    if Row == 0:
-        if (Board[Row + 1][Column] == Player) and (Board[Row +2][Column] == Player):
-            return(True)
-        if Column == 0:
-            if (Board[Row + 1][Column+1] == Player) and (Board[Row +2][Column+2] == Player):
-                return(True)
-        if Column == 2:
-            if (Board[Row + 1][Column-1] == Player) and (Board[Row +2][Column-2] == Player):
-                return(True)
-    if Column == 0:
-        if (Board[Row][Column+1] == Player) and (Board[Row][Column+2] == Player):
-            return(True)
-    if Column == 1:
-        if (Board[Row][Column+1] == Player) and (Board[Row][Column-1] == Player):
-            return(True)
-    if (Board[Row][Column-1] == Player) and (Board[Row][Column-2] == Player):
+    if (Board[0][0] == Board[1][1] == Board[2][2] != "_") or (Board[0][2] == Board[1][1] == Board[2][0] != "_"): #Check Diagonal
         return(True)
     return(False)
 
@@ -70,7 +45,7 @@ def Play(Player, Board, Turn):
             if (Row <= 3 and Row >= 1) and (Column <= 3 and Column >= 1) and (Board[Row-1][Column-1] == "_"):
                 Board[Row-1][Column-1] = Player
                 SwPl = True
-                if CheckWin(Player, Row-1, Column-1, Board) == True:
+                if CheckWin(Board) == True:
                     ShowBoard(Gameboard, Turn)
                     print()
                     print("Player", (Turn % 2)+1,"won!")

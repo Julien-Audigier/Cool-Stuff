@@ -8,8 +8,6 @@ def StringToList(string):
 
 
 def ListToString(lstring):
-    for i in range(0, len(lstring)-1):
-        print(lstring[i],end="")
     return(''.join(lstring))
 
 print()
