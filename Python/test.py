@@ -1,8 +1,18 @@
-Thing = [1,2,3,4,5,6,7,8]
-print(Thing)
-for i in range(len(Thing)-1,-1, -1):
-    Temp = Thing[i]
-    Thing.remove(Temp)
-    Thing.append(Temp)
-print(Thing)
-
+import random
+rn = random.randint(0,100)
+Guess = 111
+while Guess != rn:
+    print()
+    Guess = (input("Guess a number 0-100: "))
+    if Guess == rn:
+        print("You Won!")
+        break
+    elif Guess == "Give up":
+        break
+    elif int(Guess) > rn:
+        print()
+        print("Lower")
+    elif int(Guess) < rn:
+        print()
+        print("Higher")
+print("The number was", rn)
