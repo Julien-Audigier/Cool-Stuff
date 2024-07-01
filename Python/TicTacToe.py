@@ -1,6 +1,6 @@
 import math
 
-def ShowBoard(Board, Player, Turn):
+def ShowBoard(Board, Turn):
     print()
     print()
     print("Player {}'s turn:".format((Turn % 2)+1))
@@ -13,10 +13,49 @@ def ShowBoard(Board, Player, Turn):
         print(x +1)
     print("  1 2 3")
 
+def CheckWin(Player,Row,Column, Board):
+    if Row == 1:
+        if (Board[Row - 1][Column] == Player) and (Board[Row +1][Column] == Player):
+            return(True)
+        if Column == 1:
+            if ((Board[Row - 1][Column-1] == Player) and (Board[Row +1][Column+1] == Player) or (Board[Row - 1][Column+1] == Player) and (Board[Row +1][Column-1] == Player)):
+                return(True)
+    if Row == 2:
+        if (Board[Row - 1][Column] == Player) and (Board[Row -2][Column] == Player):
+            return(True)
+        if Column == 2:
+            if (Board[Row - 1][Column-1] == Player) and (Board[Row -2][Column-2] == Player):
+                return(True)
+        if Column == 0:
+            if (Board[Row - 1][Column+1] == Player) and (Board[Row -2][Column+2] == Player):
+                return(True)
+    if Row == 0:
+        if (Board[Row + 1][Column] == Player) and (Board[Row +2][Column] == Player):
+            return(True)
+        if Column == 0:
+            if (Board[Row + 1][Column+1] == Player) and (Board[Row +2][Column+2] == Player):
+                return(True)
+        if Column == 2:
+            if (Board[Row + 1][Column-1] == Player) and (Board[Row +2][Column-2] == Player):
+                return(True)
+    if Column == 0:
+        if (Board[Row][Column+1] == Player) and (Board[Row][Column+2] == Player):
+            return(True)
+    if Column == 1:
+        if (Board[Row][Column+1] == Player) and (Board[Row][Column-1] == Player):
+            return(True)
+    if (Board[Row][Column-1] == Player) and (Board[Row][Column-2] == Player):
+        return(True)
+    return(False)
+
+
+
+
+
 def Play(Player, Board, Turn):
     SwPl = False
     while SwPl == False:
-        ShowBoard(Gameboard, Player, Turn)
+        ShowBoard(Gameboard, Turn)
         print()
         Row = input("Which row? ")
         Column = input("Which Column? ")
@@ -31,10 +70,17 @@ def Play(Player, Board, Turn):
             if (Row <= 3 and Row >= 1) and (Column <= 3 and Column >= 1) and (Board[Row-1][Column-1] == "_"):
                 Board[Row-1][Column-1] = Player
                 SwPl = True
-                return(Board)
+                if CheckWin(Player, Row-1, Column-1, Board) == True:
+                    ShowBoard(Gameboard, Turn)
+                    print()
+                    print("Player", (Turn % 2)+1,"won!")
+                    print()
+                    return([])
+                else:
+                    return(Board)
         SwPl = False
 
-Turn = 1
+Turn = 0
 Player = "x"
 Gameboard = [["_","_","_"], ["_","_","_"], ["_","_","_"]]
 

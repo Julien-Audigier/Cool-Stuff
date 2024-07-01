@@ -15,13 +15,12 @@ def Play(Player, PSwitch):
             print()
             ShowBoard()
             print("Which column?")
-            if CheckWin(Column) == True:
+            if CheckWin() == True:
                 return True
             else:
                 return False
 
 def Collision(Player, Column):
-
     if Column.isdigit():
         Column = int(Column)
         if  (Column > 0 and Column < 8):
@@ -48,26 +47,21 @@ def ShowBoard():
     print(gameboard[4])
     print(gameboard[5])
 
-def CheckWin(Column):
-     if Column.isdigit():
-        Column = int(Column)
-        if  (Column > 0 and Column < 8):
-            Column -= 1
-            Row = 5
-            while gameboard[Row][Column] != 0 and Row != 0:
-                Row -= 1
-            Row += 1
-            if CheckDown(Row,Column) == True:
-                return True
-            
-                
-def CheckDown(Row, Column):
-    Points = 0
-    for i in range(Row, Row+4):
-        if  i >= 5 or gameboard[i][Column] != gameboard[Row]:
-            break
-        Points += 1
-        print(str(Points))
+def CheckWin():
+    for i in range(0,6):
+        for o in range(0,4):
+            if gameboard[i][o] == gameboard[i][o+1] == gameboard[i][o+2] == gameboard[i][o+3] != 0:
+                return(True)
+        for a in range(6,1,-1):
+            if gameboard[i][a] == gameboard[i][a-1] == gameboard[i][a-2] == gameboard[i][a-3] != 0:
+                return(True)
+    for u in range(0,7):
+        for g in range(0,3):
+            if gameboard[g][u] == gameboard[g+1][u] == gameboard[g+2][u] == gameboard[g+3][u] != 0:
+                return(True)
+        for k in range(5,1,-1):
+            if gameboard[k][u] == gameboard[k-1][u] == gameboard[k-2][u] == gameboard[k-3][u] != 0:
+                return(True)
     
 
 
