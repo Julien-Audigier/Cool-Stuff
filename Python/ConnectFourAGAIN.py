@@ -63,7 +63,7 @@ def CheckWin(Column):
                 
 def CheckDown(Row, Column):
     Points = 0
-    for i in range(Row, Row+4)
+    for i in range(Row, Row+4):
         if  i >= 5 or gameboard[i][Column] != gameboard[Row]:
             break
         Points += 1

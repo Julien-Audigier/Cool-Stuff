@@ -93,8 +93,8 @@ def Play(Turn, AmPl, Board):
                 SwitchPL == False
                 break
             SwitchPL = True
-            Board[Row-1][Column-1] = Player
             print(Board)
+                        Board[0][0] = Player
             return Board
         elif Row or Column == "kill":
             return False
