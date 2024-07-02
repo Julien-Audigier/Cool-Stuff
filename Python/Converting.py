@@ -10,6 +10,7 @@ def StringToList(string):
 def ListToString(lstring):
     return(''.join(lstring))
 
+
 print()
 x = StringToList(str(input("string = ")))
 print(x)

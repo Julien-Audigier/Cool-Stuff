@@ -59,7 +59,7 @@ Turn = 0
 Player = "x"
 Gameboard = [["_","_","_"], ["_","_","_"], ["_","_","_"]]
 
-while Turn <= 42 or Gameboard != []:
+while Turn <= 9 or Gameboard != []:
     Gameboard = Play(Player, Gameboard, Turn)
     if Gameboard == []:
         break
