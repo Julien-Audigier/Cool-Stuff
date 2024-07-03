@@ -1,4 +1,3 @@
-
 def ShowBoard(Board, Turn):
     print()
     print()
@@ -22,10 +21,6 @@ def CheckWin(Board):
     if (Board[0][0] == Board[1][1] == Board[2][2] != "_") or (Board[0][2] == Board[1][1] == Board[2][0] != "_"): #Check Diagonal
         return(True)
     return(False)
-
-
-
-
 
 def Play(Player, Board, Turn):
     SwPl = False
@@ -54,7 +49,6 @@ def Play(Player, Board, Turn):
                 else:
                     return(Board)
         SwPl = False
-
 Turn = 0
 Player = "x"
 Gameboard = [["_","_","_"], ["_","_","_"], ["_","_","_"]]

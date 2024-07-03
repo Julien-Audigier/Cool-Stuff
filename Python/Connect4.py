@@ -4,7 +4,7 @@ def Play(Player):
         print()
         ShowBoard()
         Column = input("Which column? ")
-        if Column == "Kill":
+        if Column == "Tie":
             return(True)
         else:
             if Collision(Player, Column) == False:
@@ -14,7 +14,7 @@ def Play(Player):
             print()
             ShowBoard()
             print("Which column?")
-            CW = CheckWin()
+            CW = CheckWin(gameboard)
             if CW == "Tie":
                 print("Tie")
                 return(True)
@@ -48,21 +48,21 @@ def ShowBoard():
     print(gameboard[4])
     print(gameboard[5])
 
-def CheckWin():
+def CheckWin(board):
     for i in range(0,6):
         for j in range(0,7):
             try:
-                if gameboard[i][j] == gameboard[i+1][j] == gameboard[i+2][j] == gameboard[i+3][j] != 0: #Check Up/Down
+                if board[i][j] == board[i+1][j] == board[i+2][j] == board[i+3][j] != 0: #Check Up/Down
                     return(True)
             except IndexError:
-                continue
+                temp = 0
             try:
-                if gameboard[i][j] == gameboard[i][j+1] == gameboard[i][j+2] == gameboard[i][j+3] != 0: #Check Right/Left
+                if board[i][j] == board[i][j+1] == board[i][j+2] == board[i][j+3] != 0: #Check Right/Left
                     return(True)
             except IndexError:
-                continue
+                temp = 0
             try: #Check Diagonal
-                if (gameboard[i][j] == gameboard[i+1][j+1] == gameboard[i+2][j+2] == gameboard[i+3][j+3] != 0) or (gameboard[i][j] == gameboard[i+1][j-1] == gameboard[i+2][j-2] == gameboard[i+3][j-3] != 0):
+                if (board[i][j] == board[i+1][j+1] == board[i+2][j+2] == board[i+3][j+3] != 0) or (board[i][j] == board[i+1][j-1] == board[i+2][j-2] == board[i+3][j-3] != 0):
                     return(True)
             except IndexError:
                 continue
