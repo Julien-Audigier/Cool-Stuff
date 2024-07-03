@@ -13,10 +13,10 @@ def ShowBoard(Board, Turn):
     print("  1 2 3")
 
 def CheckWin(Board):
-    for i in range(0,4):
+    for i in range(0,3):
             if Board[i][0] == Board[i][1] == Board[i][2] != "_": #Check Right/Left
                 return(True)
-    for u in range(0,4):
+    for u in range(0,3):
             if Board[0][u] == Board[1][u] == Board[2][u] != "_": #Check Up/Down
                 return(True)
     if (Board[0][0] == Board[1][1] == Board[2][2] != "_") or (Board[0][2] == Board[1][1] == Board[2][0] != "_"): #Check Diagonal

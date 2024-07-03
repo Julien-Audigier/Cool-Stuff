@@ -4,10 +4,12 @@ def Play(Player, gameboard):
         print()
         ShowBoard(gameboard)
         Column = input("Which column? ")
+        Row = len(gameboard)-1
+
         if Column == "Kill":
             return(True)
         else:
-            if Collision(Player, Column) == False:
+            if Collision(Player, Column,Row,gameboard) == False:
                 Play(Player, gameboard)
             print()
             print("Player",str(Player))
@@ -24,20 +26,14 @@ def Play(Player, gameboard):
             else:
                 return(False)
 
-def Collision(Player, Column):
-    if str(Column).isdigit():
-        Column = int(Column)
-        if  (Column > 0 and Column < 8):
-            Row = 5
-            Column -= 1
-            while gameboard[Row][Column] != 0 and Row != 0:
-                Row -= 1
-            if Row == 0 and gameboard[Row][Column] != 0:
-                return(False)
-            else:
-                gameboard[Row][Column] = Player
-                return(True)
-    return(False)
+def Collision(Player, Column, Row, board):
+    # Check every index of given column
+    #   board[i][col]
+    for i in reversed(range(len(board))):
+        if board[0][1] != 0:
+            return False
+        elif board[i][1] == 0:
+            
         
 def ShowBoard(Board):
 
@@ -57,7 +53,6 @@ def ShowBoard(Board):
         print(temp) #Right Numbers
     
     ShowN(len(Board)) #Bottom Numbers
-
 
 def ShowN(Length):
     print(" ", end=" ") 
@@ -122,7 +117,7 @@ while gameboard == []:
     if length.isdigit():
         if int(length) <= 30:
             while len(Row) != int(length):
-                Row.append("0")
+                Row.append(0)
             while len(gameboard) != int(length):
                 gameboard.append(Row)
 while (kill != True):
