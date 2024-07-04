@@ -55,11 +55,3 @@ Player = "x"
 Gameboard = [["_","_","_"], ["_","_","_"], ["_","_","_"]]
 
 while Turn <= 9 or Gameboard != []:
-    Gameboard = Play(Player, Gameboard, Turn)
-    if Gameboard == []:
-        break
-    if Player == "x":
-        Player = "o"
-    elif Player == "o":
-        Player = "x"
-    Turn += 1
