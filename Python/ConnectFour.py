@@ -84,6 +84,9 @@ kill = False
 
 # ~ ~ ~ Main ~ ~ ~ #
 
+print()
+print("Welcome to Connect Four")
+
 while (kill != True):
     Player = (Turns % 2) + 1
     Turns += 1

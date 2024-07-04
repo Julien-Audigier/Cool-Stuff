@@ -14,7 +14,7 @@ def play():
         return(0)
 
     Answer = 0
-    Games = ["Connect Four", "Tic-Tac-Toe", "Connect-What?"]
+    Games = ["Connect Four", "Tic-Tac-Toe", "Connect-What?","Wordle"]
 
     while Answer == 0:
         Answer = ChooseOptions(Games)
@@ -25,6 +25,8 @@ def play():
         import TicTacToe
     elif Answer == 3:
         import ConnectWhat
+    elif Answer == 4:
+        import Wordle
 
     for i in range(0,4):
         print()

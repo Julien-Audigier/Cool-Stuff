@@ -54,6 +54,9 @@ Turn = 0
 Player = "x"
 Gameboard = [["_","_","_"], ["_","_","_"], ["_","_","_"]]
 
+print()
+print("Welcome to Tic-Tac-Toe")
+
 while Turn <= 9 or Gameboard != []:
     Gameboard = Play(Player, Gameboard, Turn)
     if Gameboard == []:
