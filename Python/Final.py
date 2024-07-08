@@ -35,39 +35,68 @@ def Move(Level,locX,locY):
     return([Level,locX,locY])
 
 def collison(Level,locX,cx,locY,cy):
-    if Level[locY + cy][locX + cx] != "#":
-        if Level[locY + cy][locX + cx] == "B" and Level[locY + (2 * cy)][locX + (2 * cx)] == " ":
+    if Level[locY + cy][locX + cx] != "#" and Level[locY + cy][locX + cx] != "|":
+        if Level[locY + cy][locX + cx] == "B" and Level[locY + (2 * cy)][locX + (2 * cx)] != "#" and Level[locY + (2 * cy)][locX + (2 * cx)] != "B":
             Level[locY + (2 * cy)][locX + (2 * cx)] = "B"
             return([Level,True])
         elif Level[locY + cy][locX + cx] != "B":
             return([Level,True])
     return([Level,False])
 
-class presserplate:
+def checkPD(P,D,Level):
+    temp = P.checkShow(Level)
+    Level = temp[0]
+    D.checkOpen(Level,temp[1])
+
+class pressureplate:
     def __init__(self,locX, locY):
         self.locX = locX
         self.locY = locY
 
-    def checkShow(self,locX,locY,Level):
-        if Level[locY,locX] == " ":
-            Level[locY,locX] == "*"
-        return Level
-p1 = presserplate(2,5)
+    def checkShow(self,Level):
+        if Level[self.locY][self.locX] == " " or Level[self.locY][self.locX] == "*":
+            Level[self.locY][self.locX] = "*"
+            return([Level, False])
+        else:
+            return([Level, True])
+p1 = pressureplate(2,5)
+p2 = pressureplate(1,5)
+
+class door:
+    def __init__(self,locX, locY):
+        self.locX = locX
+        self.locY = locY
+
+    def checkOpen(self,Level,open):
+        if open == True:
+            if Level[self.locY][self.locX] == "&":
+                Level[self.locY][self.locX] = "&"
+            else:
+                Level[self.locY][self.locX] = " "
+            return(Level)
+        else:
+            Level[self.locY][self.locX] = "|"
+            return(Level)
+d1 = door(5,6)
+d2 = door(4,6)
+
 
 Level = [
     ["#","#","#","#","#","#","#","#"],
     ["#","&"," "," "," "," "," ","#"],
     ["#"," "," "," "," "," "," ","#"],
-    ["#","#","#","B","#","#","#","#"],
+    ["#","B","B","#","#","#","#","#"],
     ["#"," "," "," "," "," "," ","#"],
-    ["#"," "," "," "," ","#","#","#"],
-    ["#"," "," "," "," ","|","E","#"],
+    ["#"," "," "," ","#","#","#","#"],
+    ["#"," "," "," "," "," ","E","#"],
     ["#","#","#","#","#","#","#","#"]]
 
 locX = 1
 locY = 1
 
 while Level != True:
+    checkPD(p1,d1,Level)
+    checkPD(p2,d2,Level)
     ShowLevel(Level)
     temp = Move(Level,locX,locY)
     Level = temp[0]
