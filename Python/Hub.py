@@ -31,5 +31,3 @@ elif Answer == 5:
     import Games.RandomNumberGame as RandomNumberGame
 elif Answer == 6:
     import Final
-for i in range(0,4):
-    print()

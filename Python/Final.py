@@ -4,7 +4,7 @@ def ShowLevel(Level):
             print(Level[i][j], end=" ")
         print(Level[i][7])
 
-def Move(Level,locX,locY):
+def Move(Level,locX,locY,turns):
     Where = input("w, a, s, or d: ").lower()
     Level[locY][locX] = " "
     if Where == "w":
@@ -12,27 +12,31 @@ def Move(Level,locX,locY):
         if temp[1] == True:
             Level = temp[0]
             locY -= 1
+            turns += 1
     if Where == "s":
         temp = collison(Level, locX, 0, locY, 1)
         if temp[1] == True:
             Level = temp[0]            
             locY += 1
+            turns += 1
     if Where == "a":
         temp = collison(Level, locX, -1, locY, 0)
         if temp[1] == True:
             Level = temp[0]           
             locX -= 1
+            turns += 1
     if Where == "d":
         temp = collison(Level, locX, 1, locY, 0)
         if temp[1] == True:
             Level = temp[0]               
             locX += 1
+            turns += 1
     if Where == "kill" or Level[locY][locX] == "E":
         Level[locY][locX] = "&"
         ShowLevel(Level)
-        return(True,locX,locY)
+        return(True,locX,locY,turns)
     Level[locY][locX] = "&"
-    return([Level,locX,locY])
+    return([Level,locX,locY,turns])
 
 def collison(Level,locX,cx,locY,cy):
     if Level[locY + cy][locX + cx] != "#" and Level[locY + cy][locX + cx] != "|":
@@ -43,10 +47,6 @@ def collison(Level,locX,cx,locY,cy):
             return([Level,True])
     return([Level,False])
 
-def checkPD(P,D,Level):
-    temp = P.checkShow(Level)
-    Level = temp[0]
-    D.checkOpen(Level,temp[1])
 
 class pressureplate:
     def __init__(self,locX, locY):
@@ -63,12 +63,15 @@ p1 = pressureplate(2,5)
 p2 = pressureplate(1,5)
 
 class door:
-    def __init__(self,locX, locY):
+    def __init__(self,locX, locY, PP):
         self.locX = locX
         self.locY = locY
+        self.PP = PP
 
-    def checkOpen(self,Level,open):
-        if open == True:
+    def checkOpen(self,Level):
+        temp = self.PP.checkShow(Level)
+        Level = temp[0]
+        if temp[1] == True:
             if Level[self.locY][self.locX] == "&":
                 Level[self.locY][self.locX] = "&"
             else:
@@ -77,8 +80,8 @@ class door:
         else:
             Level[self.locY][self.locX] = "|"
             return(Level)
-d1 = door(5,6)
-d2 = door(4,6)
+d1 = door(5,6,p1)
+d2 = door(4,6,p2)
 
 
 Level = [
@@ -93,13 +96,15 @@ Level = [
 
 locX = 1
 locY = 1
+turns = 0
 
 while Level != True:
-    checkPD(p1,d1,Level)
-    checkPD(p2,d2,Level)
+    d1.checkOpen(Level)
+    d2.checkOpen(Level)
     ShowLevel(Level)
-    temp = Move(Level,locX,locY)
+    temp = Move(Level,locX,locY,turns)
     Level = temp[0]
     locX = temp[1]
     locY = temp[2]
-print("You Won")
+    turns = temp[3]
+print("You Won in",turns,"turns!")
