@@ -1,9 +1,8 @@
-
 def StringToList(string):
     lstring = []
-    for i in range(0, len(str(string))):
+    for ObjL in range(0, len(str(string))):
         string = str(string)
-        lstring.append(string[i])
+        lstring.append(string[ObjL])
     return(lstring)
 
 class pressureplate:
@@ -37,29 +36,27 @@ class door:
             Level[self.locY][self.locX] = "|"
             return(Level)
 
-filepath = "PPS.txt"
-PPI = []
+filepath = "ObjL.txt"
+ObjL = []
 with open(filepath,'r') as fileReader:
-    PPI.append(fileReader.readlines())
-PPI = PPI[0]
-for i in range(0,len(PPI)-1):
-        WBL = StringToList(PPI[i])
+    ObjL.append(fileReader.readlines())
+ObjL = ObjL[0]
+for i in range(0,len(ObjL)-1):
+        WBL = StringToList(ObjL[i])
         WBL.remove(WBL[len(WBL)-1])
-        PPI[i] = ''.join(WBL)
-PPI[0]
-print(PPI)
-PPS = [door(locX=1,locY=1) for _ in range(0,2)]
-
-filepath = "doors.txt"
-doorI = []
-with open(filepath,'r') as fileReader:
-    doorI.append(fileReader.readlines())
-doorI = doorI[0]
-for i in range(0,len(doorI)-1):
-        WBL = StringToList(doorI[i])
-        WBL.remove(WBL[len(WBL)-1])
-        doorI[i] = ''.join(WBL)
-doorI[0]
-print(doorI)
-doors = [door(locX=1,locY=1,PP=PPS[0]) for _ in range(0,doorI[0])]
-
+        ObjL[i] = ''.join(WBL)
+PPS = [pressureplate(locX=1,locY=1) for _ in range(0,int(ObjL[0]))]
+temp = 1
+for i in range(0,int(ObjL[0])):
+    PPS[i].locX = int(ObjL[temp])
+    PPS[i].locY = int(ObjL[temp+1])
+    temp+=2
+    print(PPS[i].locX,PPS[i].locY)
+doors = [door(locX=1,locY=1,PP=PPS[0]) for _ in range(0,int(ObjL[temp]))]
+temp += 1
+for i in range(0,int(ObjL[temp-1])):
+    doors[i].locX = int(ObjL[temp])
+    doors[i].locY = int(ObjL[temp+1])
+    doors[i].PP = PPS[int(ObjL[temp+2])]
+    temp+=3
+    print(doors[i].locX,doors[i].locY,doors[i].PP)
