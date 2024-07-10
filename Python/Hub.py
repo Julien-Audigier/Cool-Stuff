@@ -30,4 +30,4 @@ elif Answer == 4:
 elif Answer == 5:
     import Games.RandomNumberGame as RandomNumberGame
 elif Answer == 6:
-    import Final
+    import Games.Game as Game
