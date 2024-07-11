@@ -5755,5 +5755,3 @@ roble
 rumba
 biffy
 pupal
-abide
-basic
