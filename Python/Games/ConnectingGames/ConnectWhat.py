@@ -56,13 +56,13 @@ def ShowBoard(Board):
     ShowN(len(Board)) #Top Number
 
     for i in range(0,len(Board)):
-        ltemp = StringToList(i+1)
-        temp = ltemp[len(ltemp)-1]
-        if temp == "0":
-            print(ltemp[0], end=" ") #Left Numbers
+        temp = str(i+1)
+        if temp[len(temp)-1] == '0':
+            temp = temp[0] #Left Numbers
         else:
-            print(temp, end=" ")
-        
+            temp = temp[len(temp)-1]
+        print(temp,end=" ")
+
         for j in range(0,len(Board)):
             print(Board[i][j], end=" ") #Board
         
@@ -70,23 +70,18 @@ def ShowBoard(Board):
     
     ShowN(len(Board)) #Bottom Numbers
 
-def StringToList(string):
-    lstring = []
-    for i in range(0, len(str(string))):
-        string = str(string)
-        lstring.append(string[i])
-    return(lstring)
-
 def ShowN(Length):
     print(" ", end=" ") 
-    for i in range(1,Length):
-        ltemp = StringToList(i)
-        temp = ltemp[len(ltemp)-1]
-        if temp == "0":
-            print(ltemp[0], end=" ")
+    for i in range(1,Length+1):
+        temp = str(i)
+        if temp[len(temp)-1] == '0':
+            temp = temp[0]
         else:
+            temp = temp[len(temp)-1]
+        if i < Length:
             print(temp, end=" ")
-    print(Length)
+            continue
+        print(temp)
 
 def CheckWin(board, Conn, Player):
     for i in range(0,len(board)):
@@ -188,8 +183,8 @@ while Grav == 0:
     print()
     Grav = input("Gravity? (Yes or No) ")
     Grav = Grav.upper()
-    if Grav == "YES" or "NO":
-            break
+    if Grav == "YES" or Grav == "NO":
+        break
     Grav = 0
     print("~ Invalid Input ~")
 

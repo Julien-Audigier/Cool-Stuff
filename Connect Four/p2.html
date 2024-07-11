@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect 4 pg:2</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="1200" height="700" style="border:1px solid rgba(128, 128, 128, 0)"></canvas>
+
+    <script>
+    const c = document.getElementById("myCanvas");
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "blue";
+    ctx.fillRect(0, 20, 770, 660);
+
+
+    ctx.beginPath();
+    ctx.arc(110, 110, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(220, 110, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(330, 110, 50, 0, 2 * Math.PI);
+    ctx.stroke();
+    </script>
+    <p>
+        <a href="p1.html">Back</a>
+    </p>
+</body>
+</html>
