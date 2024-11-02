@@ -14,20 +14,16 @@ def ChooseOptions(List):
         return(0)
 
 Answer = 0
-Games = ["Connect Four", "Tic-Tac-Toe", "Connect-What?","Wordle", "Random Number Game","Escape Game"]
+Games = ["Connect-What?","Wordle", "Random Number Game","Escape Game"]
 
 while Answer == 0:
     Answer = ChooseOptions(Games)
     
 if Answer == 1:
-    import Games.ConnectingGames.ConnectFour as ConnectFour
-elif Answer == 2:
-    import Games.ConnectingGames.TicTacToe as TicTacToe
-elif Answer == 3:
     import Games.ConnectingGames.ConnectWhat as ConnectWhat
-elif Answer == 4:
+elif Answer == 2:
     import Games.WordleFiles.Wordle as Wordle
-elif Answer == 5:
+elif Answer == 3:
     import Games.RandomNumberGame as RandomNumberGame
-elif Answer == 6:
+elif Answer == 4:
     import Games.EscapeGame as EscapeGame
